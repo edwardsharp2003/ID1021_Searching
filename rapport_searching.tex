@@ -23,10 +23,15 @@
 
 \section*{Introduction}
 
+This report investigates and compares the performance differences between linear search and binary search.
+A series of experiments are conducted and results are compared, as well as comparing the theory and the order of Ordo between the two methods.
+
+
 \section*{Linear Search}
 \subsection*{Unsorted Search}
-
-key = -1 to sort through whole array and take the time of that
+When conducting the linear search, the array was made with only positive integers.
+To test the worst case scenario of the program the key, the element that is searched for in the array,
+was set to $-1$ to ensure that the whole array would be searched and the returned time would be for that of searching the whole array.
 
 \begin{figure}[h!]
   \centering
@@ -35,28 +40,41 @@ key = -1 to sort through whole array and take the time of that
   \label{fig:unsorted_search_plot}
 \end{figure}
 
-\subsection*{Sorted Search}
+When examining the results found in Figure 1, the linear nature of the algorithms runtime is clearly illustrated.
+The time taken the search the array for an element increases linearly with the size of the array, validating the $O(n)$ complexity.
 
-In the hit case, the element that is in position array size/2 is selected as the key and the time taken to find it is reported.
-In the miss case, I'm adding 10 to the largest element in the array to ensure the key is beyond the array's range.
+\subsection*{Sorted Search}
+For the sorted search, the same procedure for creating the array as for the linear search was done.
+In this instance though, two cases were reported; a hit case, and a miss case.
+For the miss case, the same procedure as the worst case scenario for the unsorted method was used and reported.
+For the hit case, the key was set to the array size divided by two.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.8\textwidth]{sorted_search_hit_linear_plot}
+  \includegraphics[width=0.8\textwidth]{sorted_search_hit_linear}
   \caption{Sorted linear search, hits, array size plotted against time}
   \label{fig:sorted_search_hit_linear_plot}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.8\textwidth]{sorted_search_miss_linear_plot}
+  \includegraphics[width=0.8\textwidth]{sorted_search_miss_linear.png}
   \caption{Sorted linear search, misses, array size plotted against time}
   \label{fig:sorted_search_miss_linear_plot}
 \end{figure}
 
+As can be seen in Figure 3, compared to Figure 1, the results between the miss case of a sorted search, and that of a search in an unsorted array, is virtually the same.
+This is not surprising, since the methods are practically the same as well.
+Comparing the hit cases and the miss cases, Figure 2 and Figure 3, it can be seen that the results of the miss cases are consistently rougly half that of the miss cases.
+This is also not suprising.
+Since this algorithm also expresses the $O(n)$ complexity, being linear, searching half of the array for the hit case would logically take half the time than searching the whole array,
+as is done in the miss case.
+
 \section*{Binary Search}
-
-
+Unlike the linear search, binary search decreases the portion of the array to be searched by half with every iteration.
+This is very efficient for sorted arrays, and the time complexity of the worst case scenario expresses a $O(\log(n))$ complexity.
+To make the miss case more accurate for this attempt, the key for the miss attempt was set to an arbitrary number, in this case 10,
+added to the value of the last element in the array.
 
 \begin{figure}[h!]
   \centering
@@ -72,140 +90,18 @@ In the miss case, I'm adding 10 to the largest element in the array to ensure th
   \label{fig:sorted_search_miss_plot}
 \end{figure}
 
-\section*{Layout}
+As can be seen from Figure 4 and Figure 5, the binary search is much more efficient than the linear search.
+The $O(\log(n))$ complexity can also be seen in the results, but there are some discrepancies in the results seen in the unpredictable spikes at certain points.
+Since the execution time is so fast for the binary search, this could be explained by interrupting background activities on the computer occupying computing power.
 
-\subsection{sections}
+  Without doing any measurement just now, we could try guessing the expected execution time of a hit case if the array size was $64 \cdot 10^6$.
+  Since the complexity is $O(\log(n))$, we could guess that the execution time would not be much more than that of the one millionn array,
+  since the curve has already plateaued at that point.
+  In testing, the time taken seems to be around 60 nano seconds, a bit more than that of the array with one million elements.
 
-{\tt *} (for
-example {\tt \textbackslash section* }).
-
-\subsection*{inserting code}
-
-{\tt minted}: {\tt List.sort()}.
-
-\begin{minted}{java}
-  for (int i = 0; i < 100; i++){
-    sum += i;
-  }
-\end{minted}
-
-\section*{numbers}
-
-$1.2345678 s$ \\
-$1.235 s$ or $1.2 s$?
-
-\subsection*{tables}
-
-\begin{table}[h]
-\begin{center}
-\begin{tabular}{l|c|c}
-\textbf{prgm} & \textbf{runtime} & \textbf{ratio}\\
-\hline
-  dummy      &  115 &     1.0\\
-  union      &  535 &     4.6\\
-  tailr      &  420 &     3.6\\
-\end{tabular}
-\caption{Union and friends, list of 50000 elements, runtime in microseconds}
-\label{tab:table1}
-\end{center}
-\end{table}
-
-\section*{no f*ing screen shots}
-
-\section*{graphs}
-
-\begin{figure}[h]
-  \centering
-  \begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[scale=0.45]{fib.png}
-    \caption{using raster graphics}
-  \end{subfigure}%
-  \begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[scale=0.45]{fib.pdf}
-    \caption{using vector graphics.}
-  \end{subfigure}
-  \caption{Difference in image formats.}
-  \label{fig:images}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[
-      xmin=12, xmax=28, ymin=0, ymax=3500,
-      xlabel=n, ylabel={time in $\mu s$},
-      width=8cm, height=6cm]
-      \addlegendentry{runtime fib(n)};
-      \addplot[] table {fib.dat};
-    \end{axis}
-
-  \end{tikzpicture}
-  \caption{The same graph using TikZ}
-  \label{fig:tikz}
-\end{figure}
-
-The graph in Fig.\ref{fig:tikz} is generated using Tikz and as you can
-see, I know have the time in "$\mu s$" instead of in "us".
-
-
-\section*{\LaTeX things}
-
-Some \LaTeX errors that I frequently see that could easily be avoided
-if you only know where they come from.
-
-\section*{less than}
-
-If you in your LaTeX code write "5 \textless\ 7" it will look like 5 <
-7 and "9 \textgreater\ 7" will look like 9 > 7. Using the characters
-\textless\ and \textgreater\ directly does not work ... so, how did I
-do it?  I used the commands {\tt  \textbackslash textless} and {\tt
-  \textbackslash textgreater} to generate the symbols \textless\ and
-\textgreater.
-
-You could also use {\tt \{\textbackslash tt 5 < 7\}} but then it
-will use the teletype font and look like this: {\tt 5 < 7}.
-
-Still another way is to write it using so called {\tt math mode}. This
-is a mode used for writing mathematical formulas in a nice way. You
-enclose your expression in {\tt \$} signs like this {\tt \$5 < 7\$}
-and then it will look like this $5 < 7$.
-
-If you have a larger mathematical expression you enclose it in double
-\$ and the result is that it is written centered with some space
-around it like this:  $$ 5 < (3 * 8 / 3 ) $$
-
-\subsection{math mode}
-
-There are several ways that you can write $n \log(n)$ in \LaTeX.
-
-\begin{itemize}
-\item {\tt \$n log(n)\$}  : which is interprated as $n xyz(n)$ i.e. $n \times l \times o \times g \times (n)$ and since we then omitt the multiplications it will be displayed as $n log(n)$
-
-\item {\tt \$n \textbackslash times log(n)\$} : which is better since
-  we then explicitly have one multiplication and it is displayed as
-  $n \times log(n)$.
-
-\item {\tt \$n \textbackslash log(n)\$} : which is how it should be
-  done, its now displayed as $n \log(n)$.
-\end{itemize}  
-
-
-
-\subsection*{why strange font}
-
-If you want to write {\em foo} in teletype font you write like this
-\verb+{\tt foo}+. If you forget the closing \} then it will look like
-this: {\tt foo. Now everything here after until the end of you report
-  will look like this. }
-
-
-
-\section*{make}
-
-
-
-
-
+\section*{Conclusion}
+This report compared the performances between linear and binary search algorithms on arrays of varying sizes.
+The reported results confirmed the theory and expected outcomes from the time complexities involved, $O(n)$ and $O(\log(n))$.
+The linear search with a time complexity of $O(n)$ grew much faster in execution time than the binary search,
+  with a time complexity of $O(\log(n))$, resulting in much faster execution times for the binary search method, especially when the array size grew larger.
 \end{document}

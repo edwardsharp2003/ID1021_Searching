@@ -7,4 +7,5 @@ add_executable(ID1021_Searching
         unsorted_search.c
         sorted_search.c
         nonbinary_sorted_search.c
-        unsorted_binary.c)
+        unsorted_binary.c
+        sorted_search_64.c)

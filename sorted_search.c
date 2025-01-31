@@ -105,7 +105,7 @@ void benchmark_search_to_separate_files(const char* hit_file_name, const char* m
 int main() {
     const char* hit_file = "sorted_search_hit.dat";   // File for hit case results
     const char* miss_file = "sorted_search_miss.dat"; // File for miss case results
-    int max_array_size = 1000000;  // Maximum array size (1 million elements)
+    int max_array_size = 64000000;  // Maximum array size (1 million elements)
     int step_size = 10000;         // Increment array size by 10,000 elements
 
     srand((unsigned int)time(NULL));  // Seed the random number generator for array generation

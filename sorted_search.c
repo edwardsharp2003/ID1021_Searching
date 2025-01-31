@@ -18,7 +18,7 @@ int* sorted_array(int n) {
     return array;
 }
 
-// Binary search for sorted arrays
+// Binary search function
 bool sorted_search(int array[], int length, int key) {
     int low = 0, high = length - 1;
     while (low <= high) {
@@ -35,14 +35,17 @@ bool sorted_search(int array[], int length, int key) {
     return false;  // Key not found
 }
 
-void benchmark_search_to_file(const char* file_name, int max_array_size, int step_size, int key) {
+// Benchmark function: Measure search time and save results to a file
+void benchmark_search_to_file(const char* file_name, int max_array_size, int step_size) {
     FILE* file = fopen(file_name, "w");
     if (file == NULL) {
         fprintf(stderr, "Error: Unable to open file '%s' for writing.\n", file_name);
         return;
     }
 
-    fprintf(file, "# Array Size\tTime Taken (microseconds)\n");
+    fprintf(file, "# Array Size\tTime Taken (milliseconds)\tKey Type\n");
+
+    int repetitions = 1000;  // Repeat the search multiple times for accuracy
 
     for (int array_size = step_size; array_size <= max_array_size; array_size += step_size) {
         int* array = sorted_array(array_size);  // Generate a sorted array
@@ -51,14 +54,28 @@ void benchmark_search_to_file(const char* file_name, int max_array_size, int ste
             break;
         }
 
-        clock_t start_time = clock();
-        sorted_search(array, array_size, key);  // Perform sorted search
-        clock_t end_time = clock();
+        // Test case 1: Search for a "hit" key (middle element of the array)
+        int key_hit = array[array_size / 2];
+        clock_t start_time_hit = clock();
+        for (int i = 0; i < repetitions; i++) {
+            sorted_search(array, array_size, key_hit);
+        }
+        clock_t end_time_hit = clock();
+        double time_taken_hit = (double)(end_time_hit - start_time_hit) * 1000 / (CLOCKS_PER_SEC * repetitions);
 
-        // Convert time to microseconds
-        double time_taken = (double)(end_time - start_time) * 1000000 / CLOCKS_PER_SEC;
+        // Test case 2: Search for a "miss" key (greater than the largest value)
+        int key_miss = array[array_size - 1] + 10;
+        clock_t start_time_miss = clock();
+        for (int i = 0; i < repetitions; i++) {
+            sorted_search(array, array_size, key_miss);
+        }
+        clock_t end_time_miss = clock();
+        double time_taken_miss = (double)(end_time_miss - start_time_miss) * 1000 / (CLOCKS_PER_SEC * repetitions);
 
-        fprintf(file, "%d\t%.2f\n", array_size, time_taken);
+        // Write results for both "hit" and "miss" cases
+        fprintf(file, "%d\t%.2f\tHit\n", array_size, time_taken_hit);
+        fprintf(file, "%d\t%.2f\tMiss\n", array_size, time_taken_miss);
+
         free(array);  // Free the allocated memory
     }
 
@@ -69,11 +86,10 @@ int main() {
     const char* output_file = "sorted_search_results";  // Save results to this file
     int max_array_size = 1000000;  // Maximum array size (1 million elements)
     int step_size = 10000;         // Increment: analyze every 10,000 elements
-    int key = -1;                  // Use a key that won't be found (worst-case scenario)
 
     srand((unsigned int)time(NULL));  // Seed the random number generator
 
-    benchmark_search_to_file(output_file, max_array_size, step_size, key);
+    benchmark_search_to_file(output_file, max_array_size, step_size);
 
     printf("Benchmark results saved to '%s'.\n", output_file);
 

@@ -1,0 +1,11 @@
+.vscode/
+.idea/
+main.dSYM/Contents
+rapport_1.aux
+rapport_1.fdb_latexmk
+rapport_1.fls
+rapport_1.log
+rapport_1.synctex.gz
+.DS_Store
+
+

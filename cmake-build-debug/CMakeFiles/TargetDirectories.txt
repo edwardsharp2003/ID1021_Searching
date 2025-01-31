@@ -1,0 +1,3 @@
+C:/Users/R2D2_/Desktop/KTH/CINTE/ID1021_Algoritmer_och_datastrukturer/2_Uppgifter/ID1021_Searching/cmake-build-debug/CMakeFiles/ID1021_Searching.dir
+C:/Users/R2D2_/Desktop/KTH/CINTE/ID1021_Algoritmer_och_datastrukturer/2_Uppgifter/ID1021_Searching/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/R2D2_/Desktop/KTH/CINTE/ID1021_Algoritmer_och_datastrukturer/2_Uppgifter/ID1021_Searching/cmake-build-debug/CMakeFiles/rebuild_cache.dir

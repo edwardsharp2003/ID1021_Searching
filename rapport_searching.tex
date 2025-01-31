@@ -23,22 +23,53 @@
 
 \section*{Introduction}
 
-\section*{Unsorted Search}
+\section*{Linear Search}
+\subsection*{Unsorted Search}
+
+key = -1 to sort through whole array and take the time of that
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{unsorted_search_plot}
-  \caption{Unsorted search, array size plotted against time}
+  \caption{Unsorted linear search, array size plotted against time}
   \label{fig:unsorted_search_plot}
 \end{figure}
 
-\section*{Sorted Search}
+\subsection*{Sorted Search}
+
+In the hit case, the element that is in position array size/2 is selected as the key and the time taken to find it is reported.
+In the miss case, I'm adding 10 to the largest element in the array to ensure the key is beyond the array's range.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.8\textwidth]{sorted_search_plot}
-  \caption{Sorted search, array size plotted against time}
-  \label{fig:sorted_search_plot}
+  \includegraphics[width=0.8\textwidth]{sorted_search_hit_linear_plot}
+  \caption{Sorted linear search, hits, array size plotted against time}
+  \label{fig:sorted_search_hit_linear_plot}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{sorted_search_miss_linear_plot}
+  \caption{Sorted linear search, misses, array size plotted against time}
+  \label{fig:sorted_search_miss_linear_plot}
+\end{figure}
+
+\section*{Binary Search}
+
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{sorted_search_hit_plot}
+  \caption{Sorted binary search, hits, array size plotted against time}
+  \label{fig:sorted_search_hit_plot}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{sorted_search_miss_plot}
+  \caption{Sorted binary search, misses, array size plotted against time}
+  \label{fig:sorted_search_miss_plot}
 \end{figure}
 
 \section*{Layout}

@@ -18,21 +18,14 @@ int* sorted_array(int n) {
     return array;
 }
 
-// Binary search function
-bool sorted_search(int array[], int length, int key) {
-    int low = 0, high = length - 1;
-    while (low <= high) {
-        int mid = low + (high - low) / 2;  // Prevent overflow
-        if (array[mid] == key) {
-            return true;
-        }
-        if (array[mid] < key) {
-            low = mid + 1;  // Search the right side
-        } else {
-            high = mid - 1;  // Search the left side
+// Linear search function
+bool sorted_search_linear(int array[], int length, int key) {
+    for (int i = 0; i < length; i++) {
+        if (array[i] == key) {
+            return true; // Found the key
         }
     }
-    return false;  // Key not found
+    return false; // Key not found
 }
 
 // Benchmark function: Write hit and miss results to separate files
@@ -49,12 +42,12 @@ void benchmark_search_to_separate_files(const char* hit_file_name, const char* m
     }
 
     // Write headers to the files
-    fprintf(hit_file, "# Array Size\tTime Taken (nanoseconds) - Hit\n");
-    fprintf(miss_file, "# Array Size\tTime Taken (nanoseconds) - Miss\n");
+    fprintf(hit_file, "# Array Size\tTime Taken (microseconds) - Hit\n");
+    fprintf(miss_file, "# Array Size\tTime Taken (microseconds) - Miss\n");
 
-    printf("# Array Size\tHit Time (nanoseconds)\tMiss Time (nanoseconds)\n");
+    printf("# Array Size\tHit Time (microseconds)\tMiss Time (microseconds)\n");
 
-    int repetitions = 1000;  // Repeat the search multiple times for better timing accuracy
+    int repetitions = 10;  // Repeat the search multiple times for better timing accuracy (reduce for large array sizes)
 
     // Perform the benchmark for all array sizes
     for (int array_size = step_size; array_size <= max_array_size; array_size += step_size) {
@@ -68,19 +61,19 @@ void benchmark_search_to_separate_files(const char* hit_file_name, const char* m
         int key_hit = array[array_size / 2];  // Middle element
         clock_t start_time_hit = clock();
         for (int i = 0; i < repetitions; i++) {
-            sorted_search(array, array_size, key_hit);
+            sorted_search_linear(array, array_size, key_hit);
         }
         clock_t end_time_hit = clock();
-        double time_taken_hit = (double)(end_time_hit - start_time_hit) * 1000000000 / (CLOCKS_PER_SEC * repetitions);
+        double time_taken_hit = (double)(end_time_hit - start_time_hit) * 1000000 / (CLOCKS_PER_SEC * repetitions);
 
         // Test 2: Search for a key that does not exist (miss)
-        int key_miss = array[array_size - 1] + 10;  // Out-of-bounds value
+        int key_miss = array[array_size - 1] + 10;  // A value greater than the largest array element
         clock_t start_time_miss = clock();
         for (int i = 0; i < repetitions; i++) {
-            sorted_search(array, array_size, key_miss);
+            sorted_search_linear(array, array_size, key_miss);
         }
         clock_t end_time_miss = clock();
-        double time_taken_miss = (double)(end_time_miss - start_time_miss) * 1000000000 / (CLOCKS_PER_SEC * repetitions);
+        double time_taken_miss = (double)(end_time_miss - start_time_miss) * 1000000 / (CLOCKS_PER_SEC * repetitions);
 
         // Write hit result to the hit file
         fprintf(hit_file, "%d\t%.2f\n", array_size, time_taken_hit);
@@ -103,10 +96,10 @@ void benchmark_search_to_separate_files(const char* hit_file_name, const char* m
 }
 
 int main() {
-    const char* hit_file = "sorted_search_hit.dat";   // File for hit case results
-    const char* miss_file = "sorted_search_miss.dat"; // File for miss case results
-    int max_array_size = 1000000;  // Maximum array size (1 million elements)
-    int step_size = 10000;         // Increment array size by 10,000 elements
+    const char* hit_file = "sorted_search_hit_linear.dat";   // File for hit case results
+    const char* miss_file = "sorted_search_miss_linear.dat"; // File for miss case results
+    int max_array_size = 1000000;  // Adjust as needed to prevent slow execution for large arrays
+    int step_size = 1000;         // Increment array size by 1,000 elements
 
     srand((unsigned int)time(NULL));  // Seed the random number generator for array generation
 

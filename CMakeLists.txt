@@ -5,4 +5,6 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(ID1021_Searching
         unsorted_search.c
-        sorted_search.c)
+        sorted_search.c
+        nonbinary_sorted_search.c
+        unsorted_binary.c)

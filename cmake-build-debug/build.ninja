@@ -55,6 +55,12 @@ build CMakeFiles/ID1021_Searching.dir/unsorted_search.c.obj: C_COMPILER__ID1021_
   OBJECT_DIR = CMakeFiles\ID1021_Searching.dir
   OBJECT_FILE_DIR = CMakeFiles\ID1021_Searching.dir
 
+build CMakeFiles/ID1021_Searching.dir/sorted_search.c.obj: C_COMPILER__ID1021_Searching_unscanned_Debug C$:/Users/R2D2_/Desktop/KTH/CINTE/ID1021_Algoritmer_och_datastrukturer/2_Uppgifter/ID1021_Searching/sorted_search.c || cmake_object_order_depends_target_ID1021_Searching
+  DEP_FILE = CMakeFiles\ID1021_Searching.dir\sorted_search.c.obj.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\ID1021_Searching.dir
+  OBJECT_FILE_DIR = CMakeFiles\ID1021_Searching.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target ID1021_Searching
@@ -63,7 +69,7 @@ build CMakeFiles/ID1021_Searching.dir/unsorted_search.c.obj: C_COMPILER__ID1021_
 #############################################
 # Link the executable ID1021_Searching.exe
 
-build ID1021_Searching.exe: C_EXECUTABLE_LINKER__ID1021_Searching_Debug CMakeFiles/ID1021_Searching.dir/unsorted_search.c.obj
+build ID1021_Searching.exe: C_EXECUTABLE_LINKER__ID1021_Searching_Debug CMakeFiles/ID1021_Searching.dir/unsorted_search.c.obj CMakeFiles/ID1021_Searching.dir/sorted_search.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\ID1021_Searching.dir

@@ -4,4 +4,5 @@ project(ID1021_Searching C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(ID1021_Searching
-        unsorted_search.c)
+        unsorted_search.c
+        sorted_search.c)
